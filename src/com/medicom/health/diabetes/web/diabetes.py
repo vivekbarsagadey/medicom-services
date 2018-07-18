@@ -1,8 +1,16 @@
-from flask_restful import Resource
+from flask import Flask, jsonify, request
+from flask_restful import Resource, reqparse
 from com.medicom.health.diabetes.model.models import AllModels
+
+import pandas as pd
+
+from com.medicom.health.diabetes.domain.user import User
 from com.medicom.health.diabetes.model.k_nearest_neighbors import KNearestNeighborsModel
 from com.medicom.health.diabetes.services.data_handler import DiabetesDataSet
 
+
+#parser = reqparse.RequestParser()
+#parser.add_argument('firstName', type=str, location='json')
 
 class DiabetesController(Resource):
     '''@swagger.doc({
@@ -29,8 +37,27 @@ class DiabetesController(Resource):
         if model_name == 'knn':
             return KNearestNeighborsModel().predict()
         else:
-            return AllModels().predict()
+            return AllModels().predictAll()
 
+    def post(self , model_name = "all"):
+        json_data = request.get_json(force=True)
+        print(json_data)
+        user = User(json_data)
+        print("user is ",user)
+        mod = AllModels()
+        userDataFrame=user.getFrame()
+        if model_name == 'knn':
+            return KNearestNeighborsModel().predict()
+        else:
+            return AllModels().predict(userDataFrame)
+
+class DiabetesDataTestController(Resource):
+    def post(self ):
+        json_data = request.get_json(force=True)
+        #args = parser.parse_args()
+        print(json_data)
+        #print(args['firstName'])
+        return {"name":"test"}
 
 class DiabetesDataSetController(Resource):
     def get(self , name = "header"):

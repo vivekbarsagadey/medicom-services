@@ -4,7 +4,7 @@ from flask_restful import Api
 from werkzeug.contrib.fixers import ProxyFix
 from flask_cors import CORS
 from com.medicom.core.web.home import HomeController
-from com.medicom.health.diabetes.web.diabetes import DiabetesController, DiabetesDataSetController
+from com.medicom.health.diabetes.web.diabetes import DiabetesController, DiabetesDataSetController ,DiabetesDataTestController
 app = Flask(__name__)
 CORS(app)
 

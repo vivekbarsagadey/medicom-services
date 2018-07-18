@@ -55,6 +55,9 @@ class DiabetesDataSet():
     def getX(self):
         return self.getDataSet()[feature_names]
 
+    def getXByDataFrame(self , df):
+        return df[feature_names]
+
 
     def getY(self):
         return self.getDataSet().Outcome

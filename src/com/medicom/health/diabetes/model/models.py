@@ -45,10 +45,10 @@ class AllModels():
         names = []
         scores = []
         for name, model in models:
-            model.fit(self.X_train, self.y_train)
+            model.fit(self.dataDataSet.getX(), self.dataDataSet.getY())
 
 
-    def predict(self):
+    def predictAll(self):
         #print(json.dumps({'columns' : diabetes.columns} , cls=NumpyEncoder))
         names = []
         scores = []
@@ -64,3 +64,15 @@ class AllModels():
         #print(tr_split.values)
         return computationList
         #return tr_split.to_json(orient='split')
+
+    def predict(self , x = {}):
+        #print(json.dumps({'columns' : diabetes.columns} , cls=NumpyEncoder))
+        names = []
+        scores = []
+        computationList = []
+        print("x",x)
+        for name, model in models:
+            y_pred = model.predict( self.dataDataSet.getXByDataFrame(x) )
+            print("y_pred", y_pred)
+            computationList.append(Computation(name,pred = str(y_pred[0])).__dict__)
+        return computationList
