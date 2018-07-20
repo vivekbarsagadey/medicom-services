@@ -25,13 +25,13 @@ from sklearn.metrics import accuracy_score
 
 models = []
 
-models.append(('KNN', KNeighborsClassifier()))
+models.append(('KNeighborsClassifier', KNeighborsClassifier()))
 models.append(('SVC', SVC()))
-models.append(('LR', LogisticRegression()))
-models.append(('DT', DecisionTreeClassifier()))
-models.append(('GNB', GaussianNB()))
-models.append(('RF', RandomForestClassifier()))
-models.append(('GB', GradientBoostingClassifier()))
+models.append(('LogisticRegression', LogisticRegression()))
+models.append(('DecisionTreeClassifier', DecisionTreeClassifier()))
+models.append(('GaussianNB', GaussianNB()))
+models.append(('RandomForestClassifier', RandomForestClassifier()))
+models.append(('GradientBoostingClassifier', GradientBoostingClassifier()))
 
 class AllModels():
     def __init__(self):
