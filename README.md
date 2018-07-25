@@ -14,3 +14,8 @@ python setup.py sdist bdist_wheel
 
 ###### To frize all the dependence
 pip freeze > requirements\install.pip
+
+###### Independant installation
+pip install flask-restful
+
+pip install pymongo

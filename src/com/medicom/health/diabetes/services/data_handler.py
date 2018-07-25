@@ -20,7 +20,7 @@ def show():
     #print("Diabetes data set describe :{}".format(df.describe))
 
 def init():
-    cleanData()
+    #cleanData()
     show()
 
 init()
