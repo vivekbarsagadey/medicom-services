@@ -60,8 +60,8 @@ class DiabetesDataTestController(Resource):
         return {"name":"test"}
 
 class DiabetesDataSetController(Resource):
-    def get(self , name = "header"):
-        if name == 'header':
+    def get(self , name = "features"):
+        if name == 'features':
             return DiabetesDataSet().getColumns()
         elif name == 'shape' :
             return DiabetesDataSet().getDataShape()

@@ -1,8 +1,13 @@
+import sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import codecs, json
-
+from  pathlib import Path
+"""
+Save model in to disk
+"""
+import pickle
 from com.medicom.health.diabetes.domain.computation import Computation
 from com.medicom.health.diabetes.services.data_handler import DiabetesDataSet
 
@@ -23,6 +28,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
 
+from com.medicom.health.diabetes.store.store_handler import StoreHandle
+
 models = []
 
 models.append(('KNeighborsClassifier', KNeighborsClassifier()))
@@ -34,12 +41,13 @@ models.append(('RandomForestClassifier', RandomForestClassifier()))
 models.append(('GradientBoostingClassifier', GradientBoostingClassifier()))
 
 class AllModels():
+
     def __init__(self):
         self.dataDataSet = DiabetesDataSet()
         self.data = self.dataDataSet.getDataSet()
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.dataDataSet.getX(), self.dataDataSet.getY(),
                                                             stratify=self.data.Outcome, random_state=0)
-        self.train()
+
 
     def train(self):
         names = []
@@ -47,13 +55,19 @@ class AllModels():
         for name, model in models:
             model.fit(self.dataDataSet.getX(), self.dataDataSet.getY())
 
+        StoreHandle().saveModel(name="all_model",model=models)
+
+
+
+    def loadModels (self):
+        return StoreHandle().getModel(name="all_model")
 
     def predictAll(self):
         #print(json.dumps({'columns' : diabetes.columns} , cls=NumpyEncoder))
         names = []
         scores = []
         computationList = []
-        for name, model in models:
+        for name, model in self.loadModels():
             self.y_pred = model.predict(self.X_test)
             scores.append(accuracy_score(self.y_test, self.y_pred))
             names.append(name)
@@ -65,13 +79,14 @@ class AllModels():
         return computationList
         #return tr_split.to_json(orient='split')
 
+
     def predict(self , x = {}):
         #print(json.dumps({'columns' : diabetes.columns} , cls=NumpyEncoder))
         names = []
         scores = []
         computationList = []
         print("x",x)
-        for name, model in models:
+        for name, model in self.loadModels():
             y_pred = model.predict( self.dataDataSet.getXByDataFrame(x) )
             print("y_pred", y_pred)
             computationList.append(Computation(name,pred = str(y_pred[0])).__dict__)
