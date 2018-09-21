@@ -1,4 +1,6 @@
 import pandas as pd
+import json
+from com.medicom.health.diabetes.store.db_handler import DBHandler
 
 
 class User:
@@ -17,6 +19,13 @@ class User:
 
     def __str__(self):
         return str(self.__dict__)
+
+    def save(self):
+
+        user_String = json.dumps(self.__dict__)
+        print("User json is ")
+        print(user_String)
+        DBHandler().getDataSource().insert_one(user_String)
 
     def getFrame(self ):
 

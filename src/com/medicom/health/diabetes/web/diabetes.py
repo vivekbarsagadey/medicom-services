@@ -45,6 +45,7 @@ class DiabetesController(Resource):
         user = User(json_data)
         print("user is ",user)
         mod = AllModels()
+        user.save()
         userDataFrame=user.getFrame()
         if model_name == 'knn':
             return KNearestNeighborsModel().predict()
