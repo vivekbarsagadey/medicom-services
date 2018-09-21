@@ -2,3 +2,4 @@ build
 /dist
 medicom_services.egg-info
 /.idea
+*.pyc
