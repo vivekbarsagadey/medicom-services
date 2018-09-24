@@ -1,7 +1,7 @@
 import pandas as pd
 import json
 from com.medicom.health.diabetes.store.db_handler import DBHandler
-
+from pymongo import MongoClient
 
 class User:
     def __init__(self ,org={}):
@@ -22,11 +22,20 @@ class User:
 
     def save(self):
 
-        user_String = json.dumps(self.__dict__)
+        user_val = json.dumps(self.__dict__)
         print("User json is ")
-        print(user_String)
-        DBHandler().getDataSource().insert_one(user_String)
+        print(user_val)
+        #DBHandler().connect_db()
+        connection = MongoClient('localhost', 27017)
+        dbs = connection.the_platfrom_db
+        '''DBHandler().connect_db()
+        data = json.loads(user_String().read())
 
+        for item in data:
+            db.insert(item)'''
+
+
+        dbs.userString.insert(user_val)
     def getFrame(self ):
 
         return pd.DataFrame(
