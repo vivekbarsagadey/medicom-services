@@ -12,7 +12,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
-
+from com.medicom.health.diabetes.store.store_handler import StoreHandle
 
 
 class KNearestNeighborsModel():
@@ -28,7 +28,6 @@ class KNearestNeighborsModel():
 
     def train(self):
         self.knnmodel.fit(self.X_train, self.y_train)
-
 
 
     def predict(self):

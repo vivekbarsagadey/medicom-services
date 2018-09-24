@@ -79,6 +79,3 @@ class DiabetesModelFeaturesController(Resource):
         if name == "id":
             return print(('Here will be patiet id.'))
 
-    def post(self,name= "id"):
-        if name == "id":
-            return DiabetesDataSet().getX()

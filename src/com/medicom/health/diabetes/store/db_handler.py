@@ -1,16 +1,15 @@
+import pymongo
 from pymongo import MongoClient
+
+connection = MongoClient()
+dbs = connection.the_platfrom_db
+
 class DBHandler:
     def __init__(self):
         print("DBHandler init")
-    def connect_db(self):
-        global db
-        connection = MongoClient()
-        dbs = connection.the_platfrom_db
-        db = dbs.userString
-        return (db)
+        print(connection.list_database_names())
     def getDataSource(self):
-
-        return (db)
+       return (dbs)
 
     def getUserDataSource(self):
-        return db.user
+        return dbs.users

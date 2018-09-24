@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restful import Api
 #from flask_restful_swagger_2 import Api
 from werkzeug.contrib.fixers import ProxyFix
+from com.medicom.health.diabetes.data.user_data import UserFileuploadscontroller
 from flask_cors import CORS
 from com.medicom.core.web.home import HomeController
 from com.medicom.health.diabetes.web.diabetes import DiabetesController, DiabetesDataSetController ,DiabetesDataTestController,DiabetesModelFeaturesController
@@ -16,5 +17,6 @@ api.add_resource(HomeController, '/', endpoint="home")
 api.add_resource(DiabetesController, '/api/diabetes/<model_name>', endpoint="diabetes")
 api.add_resource(DiabetesDataSetController, '/api/diabetes/dataset/<name>', endpoint="diabetes/dataset")
 api.add_resource(DiabetesModelFeaturesController,'/api/diabetes/features/<name>', endpoint="diabetes/features")
+api.add_resource(UserFileuploadscontroller,'/api/diabetes/dataset/upload',endpoint="dataset/uploads")
 if __name__ == '__main__':
     app.run(debug=True)
