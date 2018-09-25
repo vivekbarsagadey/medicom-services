@@ -7,7 +7,7 @@ from com.medicom.health.diabetes.services.db_handler import DBHandler
 
 class PatientFeatures:
     def __init__(self ,org={}):
-        self.firstName = org['id']
+        self.patient_id = org['patientId']
         self.pregnancy = org['pregnancy']
         self.glucose = org['glucose']
         self.bloodpressure = org['bloodpressure']
@@ -23,14 +23,15 @@ class PatientFeatures:
 
     def save(self):
         user_String = json.dumps(self.__dict__)
-        print("Patient json is ")
+        print("User json is ")
         print(user_String)
         DBHandler().getPatientDataSource().insert_one(json.loads(user_String))
 
 
-    def getFrame(self ):
 
+    def getFrame(self ):
         return pd.DataFrame(
             {'Pregnancies': self.pregnancy, 'Glucose': self.glucose, 'BloodPressure': self.bloodpressure, 'SkinThickness': self.skinThickness,
              'Insulin': self.insulin, 'BMI': self.bmi,
              'DiabetesPedigreeFunction': self.diabetesPedigreeFunction, 'Age': self.age}, index=[0])
+

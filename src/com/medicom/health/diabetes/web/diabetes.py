@@ -8,7 +8,7 @@ from com.medicom.health.diabetes.domain.user import User
 from com.medicom.health.diabetes.model.k_nearest_neighbors import KNearestNeighborsModel
 from com.medicom.health.diabetes.services.data_handler import DiabetesDataSet
 
-
+from com.medicom.health.diabetes.parser import patient_data_parser
 #parser = reqparse.RequestParser()
 #parser.add_argument('firstName', type=str, location='json')
 
@@ -75,7 +75,7 @@ class DiabetesDataSetController(Resource):
 
 
 class DiabetesModelFeaturesController(Resource):
-    def get(self,name = "id"):
-        if name == "id":
-            return print(('Here will be patiet id.'))
+    def get(self):
+        print("Features set is called")
+        patient_data_parser.PatientDataParser().getPatientListFromFile()
 
