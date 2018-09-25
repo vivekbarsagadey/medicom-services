@@ -9,7 +9,7 @@ import mimetypes
 ALLOWED_EXTENSIONS = set(['csv', 'xlsx', 'xls', 'txt'])
 
 UPLOAD_FOLDER = os.path.abspath(os.path.dirname(__name__))
-UPLOAD_FOLDER_PATH="com/medicom/health/diabetes/data/upload/"
+UPLOAD_FOLDER_PATH="/com/medicom/health/diabetes/data/upload/"
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER+UPLOAD_FOLDER_PATH
@@ -30,15 +30,13 @@ class FileHandler:
             return "No file found"
 
         file = request.files['file']
-        completeFileName = "";
+        completeFileName = ""
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             #today = date().today().isoformat(timespec='microseconds')
-            completeFileName= os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            completeFileName=(os.path.join(app.config['UPLOAD_FOLDER'],filename))
             print("filename >>>>>>>>>>>> ",completeFileName)
             file.save(completeFileName)
-
-
 
         return completeFileName
 
