@@ -1,34 +1,19 @@
-import sys
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import codecs, json
-from  pathlib import Path
 """
 Save model in to disk
 """
-import pickle
-from com.medicom.health.diabetes.domain.computation import Computation
-from com.medicom.health.diabetes.services.data_handler import DiabetesDataSet
-
-
-
-
-
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.svm import SVC
-from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import GradientBoostingClassifier
 
-
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import cross_val_score
-from sklearn.metrics import accuracy_score
-
-from com.medicom.health.diabetes.store.store_handler import StoreHandle
+from com.medicom.health.diabetes.domain.computation import Computation
+from com.medicom.health.diabetes.services.data_handler import DiabetesDataSet
+from com.medicom.health.diabetes.services.store_handler import StoreHandle
 
 models = []
 

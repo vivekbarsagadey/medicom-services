@@ -1,7 +1,9 @@
-import pandas as pd
 import json
-from com.medicom.health.diabetes.store.db_handler import DBHandler
-from pymongo import MongoClient
+
+import pandas as pd
+
+from com.medicom.health.diabetes.services.db_handler import DBHandler
+
 
 class User:
     def __init__(self ,org={}):
