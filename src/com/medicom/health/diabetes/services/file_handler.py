@@ -2,6 +2,7 @@ import os
 from flask import Flask, request, redirect, url_for, send_from_directory, render_template
 import time
 from datetime import date
+from werkzeug.utils import secure_filename
 
 import mimetypes
 
@@ -29,13 +30,15 @@ class FileHandler:
             return "No file found"
 
         file = request.files['file']
-        if file:
-            filename = file.filename
+        completeFileName = "";
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
             #today = date().today().isoformat(timespec='microseconds')
-            print("filename >>>>>>>>>>>> ", os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            completeFileName= os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            print("filename >>>>>>>>>>>> ",completeFileName)
+            file.save(completeFileName)
 
 
 
-        return True
+        return completeFileName
 

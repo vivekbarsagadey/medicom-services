@@ -13,3 +13,6 @@ class DBHandler:
 
     def getUserDataSource(self):
         return dbs.users
+
+    def getPatientDataSource(self):
+        return dbs.patients
