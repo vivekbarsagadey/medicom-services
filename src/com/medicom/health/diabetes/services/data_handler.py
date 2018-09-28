@@ -1,13 +1,17 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 import codecs, json
 
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 from sklearn.metrics import accuracy_score
+BASE_DIR = os.path.abspath(os.path.dirname(__name__))
+NEXT_FOLDER_PATH="/com/medicom/health/diabetes/data/"
+FULL_PATH =BASE_DIR +  NEXT_FOLDER_PATH
 
-df = pd.read_csv('com/medicom/health/diabetes/data/diabetes.csv')
+df = pd.read_csv(os.path.join(FULL_PATH,'diabetes.csv'))
 feature_names = ['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', 'Insulin', 'BMI', 'DiabetesPedigreeFunction', 'Age']
 
 

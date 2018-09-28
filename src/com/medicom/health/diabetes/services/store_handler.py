@@ -1,7 +1,8 @@
+import  os
 
-path = '../src/com/medicom/health/diabetes/store/'
-#filename = path+'all_model.sav'
-file_ext = '.sav'
+BASE_FLODER = os.path.abspath(os.path.dirname(__name__))
+NEXT_PATH="/com/medicom/health/diabetes/store/"
+FULL_PATH = BASE_FLODER + NEXT_PATH
 
 
 
@@ -13,7 +14,7 @@ from pathlib import Path
 class StoreHandle:
     def getModel(self, name="all_model"):
         config = Path(path+name+file_ext)
-        return pickle.load(open(path+name+file_ext, 'rb'))
+        return pickle.load(open(FULL_PATH+name+file_ext, 'rb'))
 
     def saveModel(self , name="all_model", model=None):
-        pickle.dump(model, open(path+name+file_ext, 'wb'))
+        pickle.dump(model, open(FULL_PATH+name+file_ext, 'wb'))

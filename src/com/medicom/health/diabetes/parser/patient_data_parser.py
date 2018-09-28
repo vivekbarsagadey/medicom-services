@@ -1,9 +1,12 @@
 import csv
 import re
-
+import os
 from com.medicom.health.diabetes.parser.patient_features import PatientFeatures
 
-csvfile = open('C:/Users/user/Desktop/user_diabetes.csv', 'r')
+UPLOAD_FOLDER = os.path.abspath(os.path.dirname(__name__))
+UPLOAD_FOLDER_PATH="/com/medicom/health/diabetes/data/upload/"
+Final_Path = UPLOAD_FOLDER+UPLOAD_FOLDER_PATH
+csvfile = open(os.path.join(Final_Path,'user_diabetes.csv'), 'r')
 fieldname = ('patientId','pregnancy','glucose','bloodpressure','skinThickness','insulin','bmi','diabetesPedigreeFunction','age')
 word_regex_pattern = re.compile("[^A-Za-z]+")
 
