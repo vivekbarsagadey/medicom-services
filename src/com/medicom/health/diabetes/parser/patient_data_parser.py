@@ -35,6 +35,7 @@ class PatientDataParser():
                 #print("age >>> ",patientFeatures.age)
                 patientFeatures.save();
                 print("Features saved to database sucessfully.")
-            csvfile.close()
+            name.close()
+            os.remove(csvfile)
             print("The locally stored file is deleted")
         return True
