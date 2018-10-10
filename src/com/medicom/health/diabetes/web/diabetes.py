@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_restful import Resource, reqparse
 from com.medicom.health.diabetes.model.models import AllModels
-
 import pandas as pd
 
 from com.medicom.health.diabetes.domain.user import User
@@ -39,19 +38,20 @@ class DiabetesController(Resource):
         else:
             return AllModels().predictAll()
 
+
     def post(self , model_name = "all"):
         json_data = request.get_json(force=True)
-        print(json_data)
+        print(type(json_data))
         user = User(json_data)
         print("user is ",user)
         mod = AllModels()
-        user.save()
+        #user.save()
         userDataFrame=user.getFrame()
         if model_name == 'knn':
-            return KNearestNeighborsModel().predict()
+             return KNearestNeighborsModel().predict()
         else:
-            return AllModels().predict(userDataFrame)
-
+             return AllModels().predict(userDataFrame)
+        #return {"hello":"world"}
 class DiabetesDataTestController(Resource):
     def post(self ):
         json_data = request.get_json(force=True)

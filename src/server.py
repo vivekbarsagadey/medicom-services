@@ -3,13 +3,12 @@ from flask_restful import Api
 #from flask_restful_swagger_2 import Api
 from werkzeug.contrib.fixers import ProxyFix
 from com.medicom.health.diabetes.data.user_data import UserFileuploadscontroller
-from flask_cors import CORS
+from flask_cors import CORS,cross_origin
 from com.medicom.core.web.home import HomeController
-
 from com.medicom.health.diabetes.web.diabetes import DiabetesController, DiabetesDataSetController ,DiabetesDataTestController,DiabetesModelFeaturesController
+
 app = Flask(__name__)
 CORS(app)
-
 api = Api(app , catch_all_404s=True)
 #api = Api(app,api_version='0.0', api_spec_url='/api/swagger')
 
@@ -20,4 +19,4 @@ api.add_resource(DiabetesDataSetController, '/api/diabetes/dataset/<name>', endp
 api.add_resource(DiabetesModelFeaturesController,'/api/diabetes/features', endpoint="diabetes/features")
 api.add_resource(UserFileuploadscontroller,'/api/diabetes/dataset/upload',endpoint="dataset/upload")
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True,host='0.0.0.0')
